@@ -3,6 +3,7 @@ const secretNumber = Math.floor(Math.random() * 10) + 1;
 let guess = undefined;
 let count = 0;
 let previousGuesses = [];
+const userName = prompt("What is your name?");
 
 // Prompt
 while (guess !== secretNumber) {
@@ -13,12 +14,12 @@ while (guess !== secretNumber) {
     previousGuesses.push(guess);
     guess;
   } else if (guess < secretNumber) {
-    alert("Too low. Guess Again.");
+    alert(`Sorry ${userName}, Too low. Guess Again.`);
     count++;
     previousGuesses.push(guess);
     guess;
   } else if (guess > secretNumber) {
-    alert("Too high. Guess again.");
+    alert(`Sorry ${userName}, Too high. Guess Again.`);
     count++;
     previousGuesses.push(guess);
     guess;
@@ -31,7 +32,7 @@ while (guess !== secretNumber) {
       }
     }
     alert(
-      "It only took you: " +
+      `${userName}, it only took you: ` +
         count +
         " tries but you got it! You guessed:" +
         previous_guesses_str +

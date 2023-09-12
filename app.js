@@ -1,3 +1,4 @@
+const userRecords = {};
 const userName = prompt("What is your name?");
 
 //for feature 6 turn the whole thing into a function so it can restart
@@ -7,6 +8,7 @@ function game() {
   let guess = undefined;
   let count = 0;
   let previousGuesses = [];
+  let previousRecord = userRecords[userName];
 
   // Prompt
   while (guess !== secretNumber) {
@@ -28,18 +30,34 @@ function game() {
       guess;
     } else if (guess === secretNumber) {
       let previous_guesses_str = "";
-      for (i = 0; i < previousGuesses.length; i++) {
+      for (let i = 0; i < previousGuesses.length; i++) {
         previous_guesses_str += previousGuesses[i];
         if (i < previousGuesses.length - 1) {
           previous_guesses_str += ", ";
         }
       }
+
+      let additionalMessage = "";
+
+      if (previousRecord !== undefined) {
+        if (previousRecord > count) {
+          additionalMessage = ` And you beat your previous attempt by ${
+            previousRecord - count
+          } fewer guesses!`;
+        } else if (previousRecord < count) {
+          additionalMessage = ` You did better in your last game by ${
+            count - previousRecord
+          } fewer guesses.`;
+        }
+      }
+      userRecords[userName] = count;
       alert(
         `${userName}, it only took you: ` +
           count +
           " tries but you got it! You guessed:" +
           previous_guesses_str +
-          "."
+          "." +
+          additionalMessage
       );
     }
   }
